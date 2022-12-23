@@ -23,12 +23,10 @@ import androidx.compose.ui.unit.toSize
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import java.io.File
-import java.io.IOException
-import java.nio.file.Files
-import java.nio.file.Path
 import java.nio.file.Paths
-import java.nio.file.StandardCopyOption
 import javax.swing.JFileChooser
+
+
 //fun Route.uploadFile(){
 //	post("file"){
 //		val multipart = call.receiveMultipart()
@@ -45,6 +43,8 @@ import javax.swing.JFileChooser
 //		}
 //	}
 //}
+
+
 
 //fun openFile(view: View) {
 //	val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
@@ -105,7 +105,7 @@ fun selectFile(pathState: MutableState<String?>) {
 //	}
 //}
 
-
+// Kotlin
 //private fun moveDir(src: Path, dest: Path): Boolean {
 //	if (src.toFile().isDirectory) {
 //		for (file in src.toFile().listFiles()) {
@@ -237,13 +237,36 @@ fun App() {
 							println(source)
 							println(destination)
 
-//							val success = moveDir(source.topath(),destinePath)
+
 							val sourcePath1 = Paths.get(source)
 							val targetPath1 = Paths.get(destination)
 //							Files.move(sourcePath1, targetPath1, StandardCopyOption.REPLACE_EXISTING)
 							File(source).let { sourceFile ->
 								sourceFile.copyTo(File(destination))
 								sourceFile.delete()
+
+
+
+
+//								fun addNewCourse(
+//									courseName: String?,
+//									courseDuration: String?,
+//									courseDescription: String?,
+//									courseTracks: String?
+//								) {
+//									val db = this.writableDatabase
+//
+//									val values = ContentValues()
+//
+//									values.put(NAME_COL, courseName)
+//									values.put(DURATION_COL, courseDuration)
+//									values.put(DESCRIPTION_COL, courseDescription)
+//									values.put(TRACKS_COL, courseTracks)
+//
+//									db.insert(TABLE_NAME, null, values)
+//
+//									db.close()
+//								}
 							}
 
 						}) {

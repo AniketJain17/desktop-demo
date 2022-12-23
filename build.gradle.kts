@@ -1,18 +1,34 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
-plugins {
-    kotlin("jvm")
-    id("org.jetbrains.compose")
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+//object SqlDelight {
+//    const val runtime = "com.squareup.sqldelight:runtime:$"
+//    const val android = "com.squareup.sqldelight:android-driver:$"
+//    const val native = "com.squareup.sqldelight:native-driver:$"
+//}
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+
+    }
+    dependencies {
+        classpath("com.squareup.sqldelight:gradle-plugin:1.5.3")
+    }
 }
 
-repositories {
-    mavenCentral()
-    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-    google()
+apply(plugin = "com.squareup.sqldelight")
+
+plugins {
+kotlin("jvm")
+id("org.jetbrains.compose")
+id("com.squareup.sqldelight")
 }
 
 dependencies {
-    implementation(compose.desktop.currentOs)
+    // SQLDelight
+    implementation("com.squareup.sqldelight:runtime:1.5.3")
+//    implementation("com.squareup.sqldelight:android-driver:1.5.3")
 }
 
 compose.desktop {
@@ -26,3 +42,10 @@ compose.desktop {
         }
     }
 }
+
+//sqldelight {
+//    database("testDB") {
+//        packageName = "com.desktop_template"
+//        sourceFolders = listOf("sqldelight")
+//    }
+//}
