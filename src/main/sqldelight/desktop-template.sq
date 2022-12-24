@@ -1,0 +1,14 @@
+CREATE TABLE Desktop (
+  Name TEXT NOT NULL,
+  password TEXT NOT NULL,
+  File BLOB NOT NULL,
+);
+
+insertItem:
+INSERT OR REPLACE INTO Desktop (Name,password,File) VALUES (?, ?, ?);
+
+selectAll:
+SELECT * FROM Desktop ORDER BY key;
+
+deleteAll:
+DELETE FROM Desktop;

@@ -1,16 +1,12 @@
 
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-//object SqlDelight {
-//    const val runtime = "com.squareup.sqldelight:runtime:$"
-//    const val android = "com.squareup.sqldelight:android-driver:$"
-//    const val native = "com.squareup.sqldelight:native-driver:$"
-//}
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
     repositories {
-        google()
         mavenCentral()
-
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+        google()
     }
     dependencies {
         classpath("com.squareup.sqldelight:gradle-plugin:1.5.3")
@@ -28,7 +24,8 @@ id("com.squareup.sqldelight")
 dependencies {
     // SQLDelight
     implementation("com.squareup.sqldelight:runtime:1.5.3")
-//    implementation("com.squareup.sqldelight:android-driver:1.5.3")
+    implementation(compose.desktop.currentOs)
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 compose.desktop {
@@ -43,9 +40,21 @@ compose.desktop {
     }
 }
 
-//sqldelight {
-//    database("testDB") {
-//        packageName = "com.desktop_template"
-//        sourceFolders = listOf("sqldelight")
-//    }
-//}
+repositories {
+    mavenCentral()
+}
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.kotlinOptions {
+    jvmTarget = "1.8"
+}
+val compileTestKotlin: KotlinCompile by tasks
+compileTestKotlin.kotlinOptions {
+    jvmTarget = "1.8"
+}
+
+sqldelight {
+    database("testDB") {
+        packageName = "com.desktop-template"
+        sourceFolders = listOf("sqldelight")
+    }
+}
